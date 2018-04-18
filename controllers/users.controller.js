@@ -1,5 +1,16 @@
 const User = require('../models/User');
 
+module.exports.createUser = async (ctx) => {
+  try {
+    const user = new User(ctx.request.body);
+    ctx.body = await user.save();
+    ctx.status = 201;
+  } catch (err) {
+    ctx.body = `Unable to save. ${err}`;
+    ctx.status = 400;
+  }
+};
+
 module.exports.getUser = async (ctx) => {
   try {
     const user = await User.findOne({ _id: ctx.params.userId });
@@ -11,20 +22,7 @@ module.exports.getUser = async (ctx) => {
       ctx.status = 200;
     }
   } catch (err) {
-    console.error(err);
     ctx.body = `An unexpected error occurred. ${err}`;
-    ctx.status = 400;
-  }
-};
-
-module.exports.createUser = async (ctx) => {
-  try {
-    const user = new User(ctx.request.body);
-    ctx.body = await user.save();
-    ctx.status = 201;
-  } catch (err) {
-    console.error(err);
-    ctx.body = `Unable to save. ${err}`;
     ctx.status = 400;
   }
 };
@@ -44,7 +42,6 @@ module.exports.modifyUser = async (ctx) => {
       ctx.status = 200;
     }
   } catch (err) {
-    console.error(err);
     ctx.body = `Unable to update. ${err}`;
     ctx.status = 400;
   }
@@ -61,7 +58,6 @@ module.exports.deleteUser = async (ctx) => {
       ctx.status = 200;
     }
   } catch (err) {
-    console.error(err);
     ctx.body = `Delete failed. ${err}`;
     ctx.status = 400;
   }

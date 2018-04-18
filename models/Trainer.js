@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
 
-const userSchema = new mongoose.Schema({
+const trainerSchema = new mongoose.Schema({
   name: {
     type: String,
     required: 'Please supply a name.',
@@ -15,10 +15,10 @@ const userSchema = new mongoose.Schema({
     validate: [validator.isEmail, 'Invalid email address.'],
     required: 'Please supply an email address.',
   },
-  episodes: [{
-    type: mongoose.Schema.ObjectId,
-    ref: 'Episode',
-  }],
+  bio: {
+    type: String,
+    trim: true,
+  },
 }, { timestamps: true });
 
-module.exports = mongoose.model('User', userSchema);
+module.exports = mongoose.model('Trainer', trainerSchema);
