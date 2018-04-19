@@ -28,24 +28,29 @@ module.exports.getEpisode = async (ctx) => {
 };
 
 module.exports.getEpisodes = async (ctx) => {
-  const { lng, lat, dist } = ctx.query;
-  const coordinates = [lng, lat].map(parseFloat);
-  const maxDistance = parseFloat(dist);
+  try {
+    const { lng, lat, dist = 5000 } = ctx.query;
+    const coordinates = [lng, lat].map(parseFloat);
+    const maxDistance = parseFloat(dist);
 
-  const query = {
-    location: {
-      $near: {
-        $geometry: {
-          type: 'Point',
-          coordinates,
+    const query = {
+      location: {
+        $near: {
+          $geometry: {
+            type: 'Point',
+            coordinates,
+          },
+          $maxDistance: maxDistance,
         },
-        $maxDistance: maxDistance,
       },
-    },
-  };
+    };
 
-  const episodes = await Episode.find(query).limit(10);
-  ctx.body = episodes;
+    const episodes = await Episode.find(query).limit(10);
+    ctx.body = episodes;
+  } catch (err) {
+    ctx.body = `Unable to update. ${err}`;
+    ctx.status = 400;
+  }
 };
 
 module.exports.modifyEpisode = async (ctx) => {

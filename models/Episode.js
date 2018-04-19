@@ -40,7 +40,7 @@ const episodeSchema = new mongoose.Schema({
     },
   },
   tags: [String],
-}, { timestamps: true });
+}, { timestamps: true, setDefaultsOnInsert: true });
 
 episodeSchema.index({ location: '2dsphere' });
 
