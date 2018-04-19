@@ -6,7 +6,11 @@ module.exports.createTrainer = async (ctx) => {
     ctx.body = await trainer.save();
     ctx.status = 201;
   } catch (err) {
-    ctx.body = `Unable to save. ${err}`;
+    if (err.code === 11000) {
+      ctx.body = 'Email must be unique.';
+    } else {
+      ctx.body = `Unable to save. ${err.message}`;
+    }
     ctx.status = 400;
   }
 };
