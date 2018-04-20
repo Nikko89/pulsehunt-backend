@@ -1,4 +1,5 @@
 const Episode = require('../models/Episode');
+const moment = require('moment');
 
 module.exports.createEpisode = async (ctx) => {
   try {
@@ -29,10 +30,16 @@ module.exports.getEpisode = async (ctx) => {
 
 module.exports.getEpisodes = async (ctx) => {
   try {
-    const { lng, lat, dist = 5000 } = ctx.query;
+    const {
+      lng,
+      lat,
+      dist = 5000,
+      start = new Date(moment().utc()),
+      end = new Date(moment().utc().endOf('day')),
+    } = ctx.query;
+
     const coordinates = [lng, lat].map(parseFloat);
     const maxDistance = parseFloat(dist);
-
     const query = {
       location: {
         $near: {
@@ -42,6 +49,12 @@ module.exports.getEpisodes = async (ctx) => {
           },
           $maxDistance: maxDistance,
         },
+      },
+      startTime: {
+        $gte: start,
+      },
+      endTime: {
+        $lte: end,
       },
     };
 
