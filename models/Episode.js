@@ -52,4 +52,12 @@ episodeSchema.pre('validate', function val(next) {
   }
 });
 
+function autopopulate(next) {
+  this.populate('trainer', 'name');
+  next();
+}
+
+episodeSchema.pre('find', autopopulate);
+episodeSchema.pre('findOne', autopopulate);
+
 module.exports = mongoose.model('Episode', episodeSchema);
