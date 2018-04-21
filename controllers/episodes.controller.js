@@ -34,13 +34,12 @@ module.exports.getEpisodes = async (ctx) => {
       lng,
       lat,
       dist = 5000,
-      start = new Date(moment().utc()),
-      end = new Date(moment().utc().endOf('day')),
     } = ctx.query;
 
     const coordinates = [lng, lat].map(parseFloat);
     const maxDistance = parseFloat(dist);
-    const query = {
+
+    let query = {
       location: {
         $near: {
           $geometry: {
@@ -50,15 +49,16 @@ module.exports.getEpisodes = async (ctx) => {
           $maxDistance: maxDistance,
         },
       },
-      startTime: {
-        $gte: start,
-      },
-      endTime: {
-        $lte: end,
-      },
     };
 
-    const episodes = await Episode.find(query).limit(10);
+    if (ctx.query.start) {
+      query = { ...query, startTime: { $gte: new Date(ctx.query.start) } };
+    }
+    if (ctx.query.end) {
+      query = { ...query, endTime: { $lte: new Date(ctx.query.end) } };
+    }
+
+    const episodes = await Episode.find(query);
     ctx.body = episodes;
   } catch (err) {
     ctx.body = `Unable to update. ${err}`;
