@@ -20,6 +20,11 @@ const episodeSchema = new mongoose.Schema({
     type: Date,
     required: 'You must supply an end time.',
   },
+  description: {
+    type: String,
+    trim: true,
+    required: 'You must supply a description.',
+  },
   photo: String,
   attendees: {
     type: mongoose.Schema.ObjectId,
@@ -39,7 +44,14 @@ const episodeSchema = new mongoose.Schema({
       required: 'You must supply an address.',
     },
   },
-  tags: [String],
+  tags: [{
+    type: String,
+  }],
+  sweatScore: {
+    type: Number,
+    min: 1,
+    max: 10,
+  },
 }, { timestamps: true, setDefaultsOnInsert: true });
 
 episodeSchema.index({ location: '2dsphere' });
@@ -50,6 +62,11 @@ episodeSchema.pre('validate', function val(next) {
   } else {
     next();
   }
+});
+
+episodeSchema.pre('save', function uniqueTags(next) {
+  this.tags = Array.from(new Set(this.tags));
+  next();
 });
 
 function autopopulate(next) {
