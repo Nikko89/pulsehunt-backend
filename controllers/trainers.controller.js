@@ -1,4 +1,5 @@
 const Trainer = require('../models/Trainer');
+const cloudinary = require('cloudinary');
 
 module.exports.createTrainer = async (ctx) => {
   try {
@@ -63,6 +64,19 @@ module.exports.deleteTrainer = async (ctx) => {
     }
   } catch (err) {
     ctx.body = `Delete failed. ${err}`;
+    ctx.status = 400;
+  }
+};
+
+module.exports.createUpload = async (ctx) => {
+  try {
+    const trainerId = ctx.request.body.fields.trainer;
+    const res = await cloudinary.v2.uploader.upload(ctx.request.body.files.photo.path);
+    const newTrainer = await Trainer.findByIdAndUpdate(trainerId, { $push: { photos: res.public_id } }, { new: true }).select('photos');
+    ctx.body = { photos: newTrainer.photos };
+    ctx.status = 200;
+  } catch (err) {
+    ctx.body = err.message;
     ctx.status = 400;
   }
 };

@@ -19,6 +19,7 @@ const trainerSchema = new mongoose.Schema({
     type: String,
     trim: true,
   },
+  photos: [String],
 }, { timestamps: true });
 
 module.exports = mongoose.model('Trainer', trainerSchema);

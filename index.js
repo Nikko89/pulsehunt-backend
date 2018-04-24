@@ -1,6 +1,6 @@
 require('dotenv').config();
 const Koa = require('koa');
-const bodyParser = require('koa-bodyparser');
+const bodyParser = require('koa-body');
 const cors = require('kcors');
 const compress = require('koa-compress');
 const router = require('./router');
@@ -11,7 +11,7 @@ const app = new Koa();
 
 app.use(logger());
 app.use(cors());
-app.use(bodyParser());
+app.use(bodyParser({ multipart: true }));
 
 app.use(router.routes());
 app.use(router.allowedMethods());
