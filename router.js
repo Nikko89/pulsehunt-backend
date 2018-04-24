@@ -2,7 +2,6 @@ const Router = require('koa-router');
 const userController = require('./controllers/users.controller.js');
 const trainerController = require('./controllers/trainers.controller.js');
 const episodeController = require('./controllers/episodes.controller.js');
-const uploadController = require('./controllers/uploads.controller.js');
 
 const router = new Router();
 
