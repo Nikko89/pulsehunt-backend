@@ -1,0 +1,424 @@
+{
+	"info": {
+		"_postman_id": "308bfae1-7eec-4e50-92a6-e0c276c6cab0",
+		"name": "Pulse Hunt",
+		"description": "NB: Comes prepopulated with a URL variable set. You need to change this if you decide to run the server elsewhere.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create user",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"Bobby Tables\",\n\t\"email\": \"bobby@example.com\",\n}"
+				},
+				"url": {
+					"raw": "{{url}}/user",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get user",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"Bobby Tables\",\n\t\"email\": \"bobby@example.com\",\n\t\"random\": \"Should not be here!\"\n}"
+				},
+				"url": {
+					"raw": "{{url}}/user/5ad76a3ae5e612792b085a45",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"user",
+						"5ad76a3ae5e612792b085a45"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update/modify user",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"Bobby Tables\",\n\t\"email\": \"bobby@example.com\",\n}"
+				},
+				"url": {
+					"raw": "{{url}}/user/5ad77911d62a757c577a8245",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"user",
+						"5ad77911d62a757c577a8245"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete user",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"Bobby Tables\",\n\t\"email\": \"bobby@example.com\",\n\t\"random\": \"Should not be here!\"\n}"
+				},
+				"url": {
+					"raw": "{{url}}/user/5ad76a3ae5e612792b085a46",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"user",
+						"5ad76a3ae5e612792b085a46"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create trainer",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"Bobby Tables\",\n\t\"email\": \"bobby@tables.com\",\n\t\"bio\": \"Indie Trainer\"\n}"
+				},
+				"url": {
+					"raw": "{{url}}/trainer",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"trainer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get trainer",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"Bobby Tables\",\n\t\"email\": \"bobby@example.com\",\n\t\"random\": \"Should not be here!\"\n}"
+				},
+				"url": {
+					"raw": "{{url}}/trainer/5ad7953c6f4d0b8123c81087",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"trainer",
+						"5ad7953c6f4d0b8123c81087"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update/modify trainer",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"Bobby Tables\",\n\t\"email\": \"bobby@example.com\",\n}"
+				},
+				"url": {
+					"raw": "{{url}}/trainer/5ad7953c6f4d0b8123c81087",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"trainer",
+						"5ad7953c6f4d0b8123c81087"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete trainer",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{url}}/trainer/5ad7953c6f4d0b8123c81087",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"trainer",
+						"5ad7953c6f4d0b8123c81087"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create episode",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"Friday Lunch Workout\",\n\t\"trainer\": \"5adc8d0e3f2dcd259ad50d67\",\n\t\"startTime\": \"2018-04-27T12:00\",\n\t\"endTime\": \"2018-04-27T14:30\",\n\t\"location\": {\n\t\t\"address\": \"Codeworks\",\n\t\t\"coordinates\": [\"2.1868970000000445\", \"41.401681\"]\n\t},\n\t\"tags\": [\"running\", \"jumping\", \"running\"],\n\t\"description\": \"A high intensity workout using your own bodyweight and your classmates as resistance.\",\n\t\"sweatScore\": 6\n}"
+				},
+				"url": {
+					"raw": "{{url}}/episode",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"episode"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get episode",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"Bobby Tables\",\n\t\"email\": \"bobby@example.com\",\n\t\"random\": \"Should not be here!\"\n}"
+				},
+				"url": {
+					"raw": "{{url}}/episode/5ad85c2fefc22e8e04af4d79",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"episode",
+						"5ad85c2fefc22e8e04af4d79"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update/modify episode",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"Friday Lunch Workout\",\n\t\"trainer\": \"5adc8d0e3f2dcd259ad50d67\",\n\t\"startTime\": \"2018-04-27T12:00\",\n\t\"endTime\": \"2018-04-27T14:30\",\n\t\"location\": {\n\t\t\"address\": \"Codeworks\",\n\t\t\"coordinates\": [\"2.1868970000000445\", \"41.401681\"]\n\t},\n\t\"tags\": [\"running\", \"jumping\", \"running\"],\n\t\"description\": \"A high intensity workout using your own bodyweight and your classmates as resistance.\",\n\t\"sweatScore\": 6\n}"
+				},
+				"url": {
+					"raw": "{{url}}/episode/5adf9ef40e57cb22834c27ca",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"episode",
+						"5adf9ef40e57cb22834c27ca"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete episode",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{url}}/episode/5ad85464e51a4e8c6c7b7829",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"episode",
+						"5ad85464e51a4e8c6c7b7829"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get episodes GEO",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"Bobby Tables\",\n\t\"email\": \"bobby@example.com\",\n\t\"random\": \"Should not be here!\"\n}"
+				},
+				"url": {
+					"raw": "{{url}}/episodes?lat=41.3949&lng=2.1975?start=[timeInMsSince1970]&end=[timeInMsSince1970]&dist=5000",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"episodes"
+					],
+					"query": [
+						{
+							"key": "lat",
+							"value": "41.3949"
+						},
+						{
+							"key": "lng",
+							"value": "2.1975?start=[timeInMsSince1970]"
+						},
+						{
+							"key": "end",
+							"value": "[timeInMsSince1970]"
+						},
+						{
+							"key": "dist",
+							"value": "5000"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create upload",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "photo",
+							"description": "",
+							"type": "file"
+						},
+						{
+							"key": "trainer",
+							"value": "5adc8d0e3f2dcd259ad50d67",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/upload",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"upload"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"id": "5c5fc966-a326-4b74-abf5-c76a63094cea",
+			"key": "url",
+			"value": "http://localhost:3001",
+			"type": "string",
+			"description": ""
+		}
+	]
+}
