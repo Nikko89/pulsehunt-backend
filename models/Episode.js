@@ -46,6 +46,7 @@ const episodeSchema = new mongoose.Schema({
   },
   tags: [{
     type: String,
+    trim: true,
   }],
   sweatScore: {
     type: Number,

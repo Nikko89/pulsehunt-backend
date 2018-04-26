@@ -39,7 +39,7 @@ module.exports.getEpisodes = async (ctx) => {
     const coordinates = [lng, lat].map(parseFloat);
     const maxDistance = parseFloat(dist);
 
-    let query = {
+    const query = {
       location: {
         $near: {
           $geometry: {
@@ -52,10 +52,10 @@ module.exports.getEpisodes = async (ctx) => {
     };
 
     if (ctx.query.start) {
-      query = { ...query, startTime: { $gte: new Date(ctx.query.start) } };
+      query.startTime = { $gte: new Date(parseFloat(ctx.query.start)) };
     }
     if (ctx.query.end) {
-      query = { ...query, endTime: { $lte: new Date(ctx.query.end) } };
+      query.endTime = { $lte: new Date(parseFloat(ctx.query.end)) };
     }
 
     const episodes = await Episode.find(query);
