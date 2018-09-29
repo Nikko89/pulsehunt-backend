@@ -10,8 +10,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "atob": "^2.1.2",
+    "bcrypt": "^3.0.1",
     "cloudinary": "^1.11.0",
     "dotenv": "^5.0.1",
+    "jsonwebtoken": "^8.3.0",
     "kcors": "2",
     "koa": "^2.5.0",
     "koa-body": "^2.5.0",

@@ -2,7 +2,9 @@ const Router = require('koa-router');
 const userController = require('./controllers/users.controller.js');
 const trainerController = require('./controllers/trainers.controller.js');
 const episodeController = require('./controllers/episodes.controller.js');
+const { authorize } = require('./auth.js');
 
+console.log(authorize);
 const router = new Router();
 
 // Routes
@@ -14,7 +16,10 @@ router.put('/user/:userId', userController.modifyUser);
 router.delete('/user/:userId', userController.deleteUser);
 
 // TRAINER
-router.post('/trainer', trainerController.createTrainer);
+
+router.post('/trainer', trainerController.createTrainer); // new sign up implementation
+router.get('/trainer/signin', trainerController.signIn); // new sign in implementation
+router.get('/trainer/privateroute', authorize, trainerController.private); // testing
 router.get('/trainer/:trainerId', trainerController.getTrainer);
 router.put('/trainer/:trainerId', trainerController.modifyTrainer);
 router.delete('/trainer/:trainerId', trainerController.deleteTrainer);
