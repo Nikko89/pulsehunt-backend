@@ -9,6 +9,9 @@ const router = new Router();
 
 // Routes
 
+// MAIN PAGE CHECK
+router.get('/', authorize);
+
 // USER
 router.post('/user', userController.createUser);
 router.get('/user/:userId', userController.getUser);

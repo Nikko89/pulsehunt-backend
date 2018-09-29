@@ -36,7 +36,7 @@ module.exports.signIn = async (ctx) => {
   const match = await bcrypt.compare(password, user.password);
   if (match) {
     const token = jwt.sign(
-      { expt: Math.floor(Date.now() / 1000 + 60 * 60 * 24), userId: user._id, iss: 'boss' },
+      { expt: Math.floor(Date.now() / 1000 + 60 * 60 * 24), user, iss: 'boss' },
       key,
     );
     ctx.cookies.set('pulsehunt_cookie', token);
