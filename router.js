@@ -2,15 +2,14 @@ const Router = require('koa-router');
 const userController = require('./controllers/users.controller.js');
 const trainerController = require('./controllers/trainers.controller.js');
 const episodeController = require('./controllers/episodes.controller.js');
-const { authorize } = require('./auth.js');
+const { authorize, test } = require('./auth.js');
 
-console.log(authorize);
 const router = new Router();
 
 // Routes
 
 // MAIN PAGE CHECK
-router.get('/', authorize);
+router.get('/', authorize, test);
 
 // USER
 router.post('/user', userController.createUser);
