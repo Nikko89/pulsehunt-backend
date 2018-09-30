@@ -39,8 +39,8 @@ module.exports.signIn = async (ctx) => {
       { expt: Math.floor(Date.now() / 1000 + 60 * 60 * 24), user, iss: 'boss' },
       key,
     );
-    ctx.cookies.set('pulsehunt_cookie', token);
-    ctx.body = 'find it now';
+    ctx.cookies.set('pulsehunt_cookie', token, { httpOnly: false });
+    ctx.body = user;
   }
 };
 
