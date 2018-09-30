@@ -27,6 +27,7 @@ const trainerSchema = new mongoose.Schema(
       type: String,
       trim: true,
     },
+    trainer: String,
     photos: [String],
     password: String,
   },

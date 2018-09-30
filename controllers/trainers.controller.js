@@ -14,7 +14,14 @@ module.exports.createTrainer = async (ctx) => {
     bcrypt.hash(trainerData.password, 10, async (err, hash) => {
       user = new Trainer({ ...trainerData, password: hash });
       if (err) console.log('error: ', err);
-      ctx.response.body = await user.save();
+      await user.save();
+      ctx.response.body = {
+        username: user.username,
+        name: user.name,
+        bio: user.bio,
+        id: user._id,
+        trainer: user.trainer,
+      };
     });
     ctx.status = 201;
   } else {
@@ -40,7 +47,13 @@ module.exports.signIn = async (ctx) => {
       key,
     );
     ctx.cookies.set('pulsehunt_cookie', token, { httpOnly: false });
-    ctx.body = user;
+    ctx.body = {
+      username: user.username,
+      name: user.name,
+      bio: user.bio,
+      id: user._id,
+      trainer: user.trainer,
+    };
   }
 };
 
