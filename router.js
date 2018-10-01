@@ -9,9 +9,9 @@ const router = new Router();
 // Routes
 
 // MAIN PAGE CHECK
-router.get('/', authorize, test);
+router.get('/', authorize);
 
-// USER
+// USER probably not gonna be used.
 router.post('/user', userController.createUser);
 router.get('/user/:userId', userController.getUser);
 router.put('/user/:userId', userController.modifyUser);

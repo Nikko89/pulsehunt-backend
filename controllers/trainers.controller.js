@@ -11,22 +11,22 @@ module.exports.createTrainer = async (ctx) => {
   const trainerData = ctx.request.body;
   let user = await Trainer.findOne({ email: trainerData.email });
   if (!user) {
-    bcrypt.hash(trainerData.password, 10, async (err, hash) => {
-      user = new Trainer({ ...trainerData, password: hash });
-      if (err) console.log('error: ', err);
-      await user.save();
-      ctx.response.body = {
-        username: user.username,
-        name: user.name,
-        bio: user.bio,
-        id: user._id,
-        trainer: user.trainer,
-      };
-    });
+    const hash = await bcrypt.hash(trainerData.password, 10);
+    user = new Trainer({ ...trainerData, password: hash });
+    await user.save();
+    const token = jwt.sign({ expt: Math.floor(Date.now() / 1000 + 60 * 60 * 24), user }, key);
+    ctx.body = {
+      username: user.username,
+      name: user.name,
+      bio: user.bio,
+      _id: user._id,
+      type: user.isTrainer,
+      auth_token: token,
+    };
     ctx.status = 201;
   } else {
     ctx.status = 401;
-    ctx.body = 'email already registered';
+    ctx.body = { message: 'email already registered' };
   }
 };
 
@@ -40,28 +40,37 @@ module.exports.signIn = async (ctx) => {
   const username = decoded.split(':')[0];
   const password = decoded.split(':')[1];
   const user = await Trainer.findOne({ username });
-  const match = await bcrypt.compare(password, user.password);
-  if (match) {
-    const token = jwt.sign(
-      { expt: Math.floor(Date.now() / 1000 + 60 * 60 * 24), user, iss: 'boss' },
-      key,
-    );
-    ctx.cookies.set('pulsehunt_cookie', token, { httpOnly: false });
-    ctx.body = {
-      username: user.username,
-      name: user.name,
-      bio: user.bio,
-      id: user._id,
-      trainer: user.trainer,
-    };
+  if (user) {
+    const match = await bcrypt.compare(password, user.password);
+    if (match) {
+      const token = jwt.sign({ expt: Math.floor(Date.now() / 1000 + 60 * 60 * 24), user }, key);
+      ctx.body = {
+        username: user.username,
+        name: user.name,
+        bio: user.bio,
+        _id: user._id,
+        type: user.isTrainer,
+        auth_token: token,
+      };
+    } else {
+      ctx.status = 403;
+      ctx.body = { message: 'wrong password/username combination' };
+    }
+  } else {
+    ctx.status = 403;
+    ctx.body = { message: 'username not found' };
   }
 };
 
 // testing private route
 
 module.exports.private = async (ctx) => {
+  console.log(ctx);
   ctx.status = 200;
-  ctx.body = 'congrats you reached a private route';
+  ctx.body = {
+    message: 'congrats you reached a private route',
+    userData: ctx.userData,
+  };
 };
 
 module.exports.getTrainer = async (ctx) => {
