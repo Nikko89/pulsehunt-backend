@@ -28,6 +28,12 @@ const trainerSchema = new mongoose.Schema(
       trim: true,
     },
     isTrainer: String,
+    episodes: [
+      {
+        type: mongoose.Schema.ObjectId,
+        ref: 'Episode',
+      },
+    ],
     photos: [String],
     password: String,
   },

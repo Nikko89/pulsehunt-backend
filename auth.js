@@ -20,7 +20,3 @@ module.exports.authorize = (ctx, next) => {
     ctx.status = 401;
   }
 };
-
-module.exports.test = (ctx) => {
-  ctx.body = { message: 'mission accomplished' };
-};

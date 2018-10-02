@@ -1,21 +1,14 @@
 const Router = require('koa-router');
-const userController = require('./controllers/users.controller.js');
 const trainerController = require('./controllers/trainers.controller.js');
 const episodeController = require('./controllers/episodes.controller.js');
-const { authorize, test } = require('./auth.js');
+const { authorize } = require('./auth.js');
 
 const router = new Router();
 
 // Routes
 
-// MAIN PAGE CHECK
+// MAIN PAGE AUTH CHECK
 router.get('/', authorize);
-
-// USER probably not gonna be used.
-router.post('/user', userController.createUser);
-router.get('/user/:userId', userController.getUser);
-router.put('/user/:userId', userController.modifyUser);
-router.delete('/user/:userId', userController.deleteUser);
 
 // TRAINER
 

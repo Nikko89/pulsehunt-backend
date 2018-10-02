@@ -19,6 +19,7 @@ module.exports.getEpisode = async (ctx) => {
       ctx.body = 'No episode with that id found.';
       ctx.status = 404;
     } else {
+      console.log('EPISODE : ', episode);
       ctx.body = episode;
       ctx.status = 200;
     }
@@ -30,15 +31,10 @@ module.exports.getEpisode = async (ctx) => {
 
 module.exports.getEpisodes = async (ctx) => {
   try {
-    const {
-      lng,
-      lat,
-      dist = 5000,
-    } = ctx.query;
-
+    const { lng, lat, dist = 5000 } = ctx.query;
     const coordinates = [lng, lat].map(parseFloat);
     const maxDistance = parseFloat(dist);
-
+    console.log('coords: ', coordinates, 'max dist :', maxDistance);
     const query = {
       location: {
         $near: {
@@ -68,11 +64,10 @@ module.exports.getEpisodes = async (ctx) => {
 
 module.exports.modifyEpisode = async (ctx) => {
   try {
-    const updatedEpisode = await Episode.findByIdAndUpdate(
-      ctx.params.episodeId,
-      ctx.request.body,
-      { new: true, runValidators: true },
-    );
+    const updatedEpisode = await Episode.findByIdAndUpdate(ctx.params.episodeId, ctx.request.body, {
+      new: true,
+      runValidators: true,
+    });
     if (!updatedEpisode) {
       ctx.body = 'No episode with that id found.';
       ctx.status = 404;

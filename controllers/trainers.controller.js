@@ -22,6 +22,7 @@ module.exports.createTrainer = async (ctx) => {
       _id: user._id,
       type: user.isTrainer,
       auth_token: token,
+      episodes: user.episodes,
     };
     ctx.status = 201;
   } else {
@@ -91,11 +92,17 @@ module.exports.getTrainer = async (ctx) => {
 };
 
 module.exports.modifyTrainer = async (ctx) => {
+  console.log(ctx.request.body);
   try {
-    const updatedTrainer = await Trainer.findByIdAndUpdate(ctx.params.trainerId, ctx.request.body, {
-      new: true,
-      runValidators: true,
-    });
+    const updatedTrainer = await Trainer.findOneAndUpdate(
+      { _id: ctx.params.trainerId },
+      { $addToSet: { episodes: ctx.request.body } },
+      {
+        new: true,
+        runValidators: true,
+      },
+      res => res,
+    );
     if (!updatedTrainer) {
       ctx.body = 'No trainer with that id found.';
       ctx.status = 404;
