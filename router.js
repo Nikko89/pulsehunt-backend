@@ -1,30 +1,29 @@
 const Router = require('koa-router');
 const trainerController = require('./controllers/trainers.controller.js');
 const episodeController = require('./controllers/episodes.controller.js');
-const { authorize } = require('./auth.js');
+const { authMiddleware } = require('./auth.js');
 
 const router = new Router();
 
 // Routes
 
 // MAIN PAGE AUTH CHECK
-router.get('/', authorize);
+router.get('/', authMiddleware);
 
 // TRAINER
 
 router.post('/trainer', trainerController.createTrainer); // new sign up implementation
 router.get('/trainer/signin', trainerController.signIn); // new sign in implementation
-router.get('/trainer/privateroute', authorize, trainerController.private); // testing
-router.get('/trainer/:trainerId', trainerController.getTrainer);
-router.put('/trainer/:trainerId', trainerController.modifyTrainer);
-router.delete('/trainer/:trainerId', trainerController.deleteTrainer);
-router.post('/upload', trainerController.createUpload);
+router.get('/trainer/:trainerId', authMiddleware, trainerController.getTrainer);
+router.put('/trainer/:trainerId', authMiddleware, trainerController.modifyTrainer);
+router.delete('/trainer/:trainerId', authMiddleware, trainerController.deleteTrainer);
+router.post('/upload', authMiddleware, trainerController.createUpload);
 
 // EPISODE
-router.post('/episode', episodeController.createEpisode);
-router.get('/episode/:episodeId', episodeController.getEpisode);
-router.get('/episodes', episodeController.getEpisodes);
-router.put('/episode/:episodeId', episodeController.modifyEpisode);
-router.delete('/episode/:episodeId', episodeController.deleteEpisode);
+router.post('/episode', authMiddleware, episodeController.createEpisode);
+router.get('/episode/:episodeId', authMiddleware, episodeController.getEpisode);
+router.get('/episodes', authMiddleware, episodeController.getEpisodes);
+router.put('/episode/:episodeId', authMiddleware, episodeController.modifyEpisode);
+router.delete('/episode/:episodeId', authMiddleware, episodeController.deleteEpisode);
 
 module.exports = router;

@@ -41,18 +41,14 @@ module.exports.signIn = async (ctx) => {
   const username = decoded.split(':')[0];
   const password = decoded.split(':')[1];
   const user = await Trainer.findOne({ username });
+  console.log(user);
   if (user) {
     const match = await bcrypt.compare(password, user.password);
     if (match) {
       const token = jwt.sign({ expt: Math.floor(Date.now() / 1000 + 60 * 60 * 24), user }, key);
-      ctx.body = {
-        username: user.username,
-        name: user.name,
-        bio: user.bio,
-        _id: user._id,
-        type: user.isTrainer,
-        auth_token: token,
-      };
+      delete user._doc.password;
+      user._doc.token = token;
+      ctx.body = user._doc;
     } else {
       ctx.status = 403;
       ctx.body = { message: 'wrong password/username combination' };
@@ -92,11 +88,10 @@ module.exports.getTrainer = async (ctx) => {
 };
 
 module.exports.modifyTrainer = async (ctx) => {
-  console.log(ctx.request.body);
   try {
     const updatedTrainer = await Trainer.findOneAndUpdate(
-      { _id: ctx.params.trainerId },
-      { $addToSet: { episodes: ctx.request.body } },
+      { _id: ctx.user.user._id },
+      { $addToSet: { episodes: ctx.request.body.episodes } },
       {
         new: true,
         runValidators: true,

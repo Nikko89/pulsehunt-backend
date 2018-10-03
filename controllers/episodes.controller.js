@@ -4,10 +4,12 @@ const Episode = require('../models/Episode');
 module.exports.createEpisode = async (ctx) => {
   try {
     const episode = new Episode(ctx.request.body);
-    ctx.body = await episode.save();
+    const result = await episode.save();
+    ctx.body = result;
     ctx.status = 201;
   } catch (err) {
-    ctx.body = `Unable to save. ${err.message}`;
+    console.log(err);
+    ctx.body = { message: `Unable to save. ${err.message}` };
     ctx.status = 400;
   }
 };
@@ -55,7 +57,9 @@ module.exports.getEpisodes = async (ctx) => {
     }
 
     const episodes = await Episode.find(query);
+    console.log('khfdrkshfbgdkhgjgh', episodes);
     ctx.body = episodes;
+    ctx.status = 200;
   } catch (err) {
     ctx.body = `Unable to update. ${err}`;
     ctx.status = 400;
