@@ -27,7 +27,7 @@ const trainerSchema = new mongoose.Schema(
       type: String,
       trim: true,
     },
-    isTrainer: String,
+    type: String,
     episodes: [
       {
         type: mongoose.Schema.ObjectId,

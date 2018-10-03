@@ -20,8 +20,8 @@ module.exports.createTrainer = async (ctx) => {
       name: user.name,
       bio: user.bio,
       _id: user._id,
-      type: user.isTrainer,
-      auth_token: token,
+      type: user.type,
+      token,
       episodes: user.episodes,
     };
     ctx.status = 201;
