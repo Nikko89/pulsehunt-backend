@@ -45,7 +45,10 @@ module.exports.signIn = async (ctx) => {
   if (user) {
     const match = await bcrypt.compare(password, user.password);
     if (match) {
-      const token = jwt.sign({ expt: Math.floor(Date.now() / 1000 + 60 * 60 * 24), user }, key);
+      const token = jwt.sign(
+        { expt: Math.floor(Date.now() / 1000 + 60 * 60 * 24), user },
+        key.mySecret,
+      );
       delete user._doc.password;
       user._doc.token = token;
       ctx.body = user._doc;
