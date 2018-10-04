@@ -8,7 +8,7 @@ const router = new Router();
 // Routes
 
 // MAIN PAGE AUTH CHECK
-router.get('/', authMiddleware);
+router.get('/', authMiddleware, ctx => (ctx.body = ctx.user));
 
 // TRAINER
 

@@ -4,7 +4,7 @@ const atob = require('atob');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
-const key = 'ramen';
+const key = require('../config.js');
 
 // new signup implementation
 module.exports.createTrainer = async (ctx) => {
