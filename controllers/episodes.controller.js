@@ -8,7 +8,6 @@ module.exports.createEpisode = async (ctx) => {
     ctx.body = result;
     ctx.status = 201;
   } catch (err) {
-    console.log(err);
     ctx.body = { message: `Unable to save. ${err.message}` };
     ctx.status = 400;
   }
@@ -21,7 +20,6 @@ module.exports.getEpisode = async (ctx) => {
       ctx.body = 'No episode with that id found.';
       ctx.status = 404;
     } else {
-      console.log('EPISODE : ', episode);
       ctx.body = episode;
       ctx.status = 200;
     }
@@ -36,7 +34,6 @@ module.exports.getEpisodes = async (ctx) => {
     const { lng, lat, dist = 5000 } = ctx.query;
     const coordinates = [lng, lat].map(parseFloat);
     const maxDistance = parseFloat(dist);
-    console.log('coords: ', coordinates, 'max dist :', maxDistance);
     const query = {
       location: {
         $near: {
@@ -57,7 +54,6 @@ module.exports.getEpisodes = async (ctx) => {
     }
 
     const episodes = await Episode.find(query);
-    console.log('khfdrkshfbgdkhgjgh', episodes);
     ctx.body = episodes;
     ctx.status = 200;
   } catch (err) {

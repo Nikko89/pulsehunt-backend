@@ -1,7 +1,5 @@
 const mySecret = require('./config.js');
 
-console.log(mySecret);
-
 const jwt = require('jsonwebtoken');
 
 module.exports.authMiddleware = async (ctx, next) => {

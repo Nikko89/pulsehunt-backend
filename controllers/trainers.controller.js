@@ -14,7 +14,10 @@ module.exports.createTrainer = async (ctx) => {
     const hash = await bcrypt.hash(trainerData.password, 10);
     user = new Trainer({ ...trainerData, password: hash });
     await user.save();
-    const token = jwt.sign({ expt: Math.floor(Date.now() / 1000 + 60 * 60 * 24), user }, key);
+    const token = jwt.sign(
+      { expt: Math.floor(Date.now() / 1000 + 60 * 60 * 24), user },
+      key.mySecret,
+    );
     ctx.body = {
       username: user.username,
       name: user.name,
@@ -41,7 +44,6 @@ module.exports.signIn = async (ctx) => {
   const username = decoded.split(':')[0];
   const password = decoded.split(':')[1];
   const user = await Trainer.findOne({ username });
-  console.log(user);
   if (user) {
     const match = await bcrypt.compare(password, user.password);
     if (match) {
@@ -65,7 +67,6 @@ module.exports.signIn = async (ctx) => {
 // testing private route
 
 module.exports.private = async (ctx) => {
-  console.log(ctx);
   ctx.status = 200;
   ctx.body = {
     message: 'congrats you reached a private route',
@@ -76,7 +77,6 @@ module.exports.private = async (ctx) => {
 module.exports.getTrainer = async (ctx) => {
   try {
     const trainer = await Trainer.findOne({ _id: ctx.params.trainerId });
-    console.log(trainer);
     if (!trainer) {
       ctx.body = 'No trainer with that id found.';
       ctx.status = 404;

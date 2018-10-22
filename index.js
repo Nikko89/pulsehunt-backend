@@ -22,5 +22,6 @@ app.use(compress());
 const host = process.env.IP || 'localhost';
 const port = process.env.PORT || 3001;
 app.listen(port, () => {
+  // eslint-disable-next-line
   console.log(`Server running at http://${host}:${port}`);
 });
