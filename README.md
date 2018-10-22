@@ -33,9 +33,6 @@ You can run this backend isolated, but it will make more sense if you combine it
 ## TODOs
 * Testing!
 * Add additional filtering for the episodes endpoint
-* Authentication (see [frontend repo](https://github.com/cherlin/pulsehunt-frontend))
-* ..
-* ..
 
 ## Feedback
 If you have any feedback, send me an [email](mailto:christofer.herlin@gmail.com) or open an issue on the repo.
