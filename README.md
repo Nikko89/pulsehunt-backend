@@ -1,15 +1,8 @@
 # Pulse Hunt (server/backend)
 
-Pulse Hunt is a solo prject of a Codeworks student, developed in one week. We decided as a learning experience to jump in and implement some of the features that the orignal author wished to see.
-- On the backend we developed an authentication middleware using JsonWebToken.
-- On the frontend we added a landing login/signup page, made the layout responsive for any device resolution and slightly improved/smoothened the UI.
+Pulse Hunt is a market place where Indie Trainers can offer their workout sessions to users.
 
-Below you can find the original Readme of the project.
-___
-
-Pulse Hunt is a market place where Indie Trainers can offer their workout sessions to users. The project was initiated as a one week solo project when attending [Codeworks](https://codeworks.me) Coding Bootcamp in Barcelona.
-
-This is the server/backend. The client/frontend can be found [here](https://github.com/cherlin/pulsehunt-frontend "Pulse Hunt backend")
+This is the server/backend repo. The client/frontend can be found [here](https://github.com/Tezenn/pulsehunt-frontend).
 
 ## Getting started
 
