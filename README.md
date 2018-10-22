@@ -1,8 +1,9 @@
 # Pulse Hunt (server/backend)
 
 Pulse Hunt is a solo prject of a Codeworks student, developed in one week. We decided as a learning experience to jump in and implement some of the features that the orignal author wished to see.
-On the backend we developed an authentication middleware using JsonWebToken.
-On the frontend we added a landing login/signup page, made the layout responsive for any device resolution and slightly improved/smoothened the UI.
+- On the backend we developed an authentication middleware using JsonWebToken.
+- On the frontend we added a landing login/signup page, made the layout responsive for any device resolution and slightly improved/smoothened the UI.
+
 Below you can find the original Readme of the project.
 ___
 
